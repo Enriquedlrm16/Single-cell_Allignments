@@ -63,8 +63,27 @@ Here I describe how to reach the same output cluster results, and the same numbe
 
 ## CellRanger
 
+### Directory and folders content:
+> ~/Downloads/cellranger_probe_sc$ ls
+#### cellranger-7.2.0  cellranger-7.2.0.tar.gz  cellranger-7.2.0.tar.tar  pbmc_1k_v3_fastqs  pbmc_1k_v3_fastqs.tar  refdata-gex-GRCh38-2020-A  refdata-gex-GRCh38-2020-A.tar.gz
+
 ### 
 > curl -o cellranger-7.2.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-7.2.0.tar.gz?Expires=1708126137&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=kjBAMOEuKNyNXKXOgMuGF2n4-3XAaa7-hJvEnVB2P9jbXj14f6bG46FbuhUN06C14JmIJAicozUpEbYOst1VsdbmStedVU1b5IOKuaaKrVxWSLgzk4W~hvmBLEAyCuta~4iskl1Tehg6EVHbFzZ64I9q0gQpFeY8QI89p1nztjRoWL8MTuQjufVu1VSs2NEmlMIfHGdxL20Z18L8Fc1DIlRooM0CFu5URCwch3XZDvPtJh6ZyMWYYQAKEKXcfH9udWACdYNPH7-iiarliRQAU~w4ZSO-Yf0Fz4m68pqccN8JPylG9AaTRPegbqYFctaapk~0bvofYtKmNr9D5W8arA__"
 
 ###
-> 
+> curl -O "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2020-A.tar.gz"
+
+### 
+> tar -xzvf cellranger-7.2.0.tar.gz
+
+### 
+> tar -xzvf refdata-gex-GRCh38-2020-A.tar.gz
+
+###
+> export PATH=/home/jrivas/Downloads/cellranger_probe_sc/cellranger-7.2.0:$PATH
+
+### 
+> ulimit -n 1024
+
+### 
+> /home/jrivas/Downloads/cellranger_probe_sc/cellranger-7.2.0/bin/cellranger count --id=run_count_1kpbmcs --fastqs=/home/jrivas/Downloads/cellranger_probe_sc/pbmc_1k_v3_fastqs --sample=pbmc_1k_v3 --transcriptome=/home/jrivas/Downloads/cellranger_probe_sc/refdata-gex-GRCh38-2020-A
