@@ -5,10 +5,10 @@ Here I describe how to reach the same output cluster results, and the same numbe
 
 ### Directory and folders content:
 > ~/Downloads/single_cell_alevin$ ls
-### pbmc_10k_v3_fastqs.tar  pbmc_1k_v3_fastqs.tar  refdata-gex-GRCh38-2020-A  simpleaf
+#### pbmc_10k_v3_fastqs.tar  pbmc_1k_v3_fastqs.tar  refdata-gex-GRCh38-2020-A  simpleaf
 
 > ~/Downloads/single_cell_alevin/simpleaf$ ls
-### analyze_alignment.R  genes.gtf  genome.fa  index_dir  linux_commands_single_cell_alevinfry  output_dir  output_dir_  pbmc_1k_v3_fastqs  plist  r_script_simpleaf.R  simpleaf_info.json
+#### analyze_alignment.R  genes.gtf  genome.fa  index_dir  linux_commands_single_cell_alevinfry  output_dir  output_dir_  pbmc_1k_v3_fastqs  plist  r_script_simpleaf.R  simpleaf_info.json
 
 ### Install alevin-fry with conda:
 > conda install -c bioconda alevin-fry
