@@ -61,6 +61,20 @@ Here I describe how to reach the same output cluster results, and the same numbe
 ### --t2g-map index_dir/index/t2g_3col.tsv: This specifies the transcript-to-gene mapping file used for quantification.
 > simpleaf quant --reads1 pbmc_10k_v3_fastqs/pbmc_10k_v3_S1_L001_R1_001.fastq.gz,pbmc_10k_v3_fastqs/pbmc_10k_v3_S1_L002_R1_001.fastq.gz --reads2 pbmc_10k_v3_fastqs/  pbmc_10k_v3_S1_L001_R2_001.fastq.gz,pbmc_10k_v3_fastqs/pbmc_10k_v3_S1_L002_R2_001.fastq.gz --threads 20 --index index_dir/index --chemistry 10xv3 --resolution cr-like --unfiltered-pl --expected-ori fw --t2g-map index_dir/index/t2g_3col.tsv --output output_dir
 
+### In R, we have to do the same filtering as CellRanger, that is more or less "cells_with_800_umi <- cell_sums >= 800": 
+> a <- fishpond::loadFry("/home/jrivas/Downloads/single_cell_alevin/simpleaf/output_dir/af_quant/",
+                         outputFormat = "scrna", nonzero = T)
+
+> cell_sums <- colSums(counts(a))
+
+> cells_with_800_umi <- cell_sums >= 800
+
+> a_filtered <- a[,cells_with_800_umi]
+
+> seurat_obj <- Seurat::CreateSeuratObject(counts(a_filtered), )
+
+### To continue the scRNA-seq pipeline in R, see my own scRNA-seq workflow: https://github.com/Enriquedlrm16/scRNA-seq_Workflow
+
 ## CellRanger
 
 ### Directory and folders content:
@@ -87,3 +101,8 @@ Here I describe how to reach the same output cluster results, and the same numbe
 
 ### Run the cellranger count pipeline on the specified input FASTQ files, using the specified transcriptome reference data. It will produce an output directory named run_count_1kpbmcs containing the results of the gene expression analysis.
 > /home/jrivas/Downloads/cellranger_probe_sc/cellranger-7.2.0/bin/cellranger count --id=run_count_1kpbmcs --fastqs=/home/jrivas/Downloads/cellranger_probe_sc/pbmc_1k_v3_fastqs --sample=pbmc_1k_v3 --transcriptome=/home/jrivas/Downloads/cellranger_probe_sc/refdata-gex-GRCh38-2020-A
+
+### In R
+>  b <- Read10X("/home/jrivas/Downloads/cellranger_probe_sc/run_count_1kpbmcs/outs/filtered_feature_bc_matrix/")
+
+### To continue the scRNA-seq pipeline in R, see my own scRNA-seq workflow: https://github.com/Enriquedlrm16/scRNA-seq_Workflow
